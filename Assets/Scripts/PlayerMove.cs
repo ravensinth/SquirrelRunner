@@ -19,11 +19,22 @@ public class PlayerMove : MonoBehaviour {
 
     }
     void OnTriggerEnter2D(Collider2D otherObj) {
-        Debug.Log("Collision");
         if (otherObj.tag == "Obstacle") {
-            // Speed zurücksetzen + Menü
+            //  Menü
             Application.LoadLevel(0);
+            SceneVariables.ResetGame();
             Debug.Log("CollisionObs");
         }
+        if (otherObj.tag == "Collectable") {
+            Destroy(otherObj.gameObject);
+            Debug.Log("CollisionCol");
+        }
     }
+    void OnCollisionEnter2D(Collision2D coll) {
+        Debug.Log("Collision");
+    }
+
+
 }
+
+

@@ -2,7 +2,7 @@
 using System.Collections;
 //using System.Collections.Generic;
 
-public class MoveObstacle : MonoBehaviour {
+public class MoveElements : MonoBehaviour {
     private float GameSpeed = SceneVariables.GameSpeed;
     void Start() {
 
