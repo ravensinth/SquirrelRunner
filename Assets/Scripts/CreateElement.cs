@@ -1,17 +1,11 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class CreateCollectables : MonoBehaviour {
+public class CreateElement : MonoBehaviour {
 
-    //    void placeCollectable() {
-    //    Instantiate(Collectable, new Vector3(leftOrRight(), FixedY, Collectable.transform.position.z), Quaternion.identity);
-    //    setDistanceNextOne();
-    //}
-
-    /*
-    public GameObject Collectable;
-    private float XLeftSide = -1.25f;
-    private float XRightSide = 1.25f;
+    public GameObject Element;
+    private static float XLeftSide = -1.25f;
+    private static float XRightSide = 1.25f;
     public float FixedY;
     public float MaxDistanceToNext;
     public float MinDistanceToNext;
@@ -24,23 +18,22 @@ public class CreateCollectables : MonoBehaviour {
 
     // Use this for initialization
     void Start() {
-        placeCollectable();
+        placeElement();
     }
 
     // Update is called once per frame
     void Update() {
-        // Seite mit einbeziehen /Entfernung + Wahrscheinlichkeit
-
-        if (FixedY - getNewestCollectable().transform.position.y >= distanceNextOne) {
-            placeCollectable();
+        if (FixedY - getNewestElement().transform.position.y >= distanceNextOne) {
+            placeElement();
         }
 
     }
 
-    void placeCollectable() {
-        Instantiate(Collectable, new Vector3(leftOrRight(), FixedY, Collectable.transform.position.z), Quaternion.identity);
+    void placeElement() {
+        Instantiate(Element, new Vector3(leftOrRight(), FixedY, Element.transform.position.z), Quaternion.identity);
         setDistanceNextOne();
     }
+    
 
     float leftOrRight() {
         float min = 0.0f + consecutiveLeft * FactorProbablySameSide;
@@ -61,8 +54,8 @@ public class CreateCollectables : MonoBehaviour {
         distanceNextOne = Random.Range(MinDistanceToNext, MaxDistanceToNext);
     }
 
-    GameObject getNewestCollectable() {
-        GameObject[] collectables = GameObject.FindGameObjectsWithTag("Collectable");
+    GameObject getNewestElement() {
+        GameObject[] collectables = GameObject.FindGameObjectsWithTag(Element.tag);
         GameObject newest = null;
         float newestY = -50;
         foreach (GameObject collectable in collectables) {
@@ -73,11 +66,4 @@ public class CreateCollectables : MonoBehaviour {
         }
         return newest;
     }
-
-    //void OnTriggerEnter2D(Collider2D otherObj) {
-    //    if (otherObj.tag == "Obstacle") {
-    //        Destroy(this);
-    //    }
-    //}
-     * */
 }
