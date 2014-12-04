@@ -23,8 +23,10 @@ public class CreateElement : MonoBehaviour {
 
     // Update is called once per frame
     void Update() {
-        if (FixedY - getNewestElement().transform.position.y >= distanceNextOne) {
-            placeElement();
+        if (getNewestElement() != null) {
+            if (FixedY - getNewestElement().transform.position.y >= distanceNextOne) {
+                placeElement();
+            }
         }
 
     }

@@ -11,6 +11,7 @@ public  class SceneVariables : MonoBehaviour {
     //public static List<GameObject> TreesInScene = new List<GameObject>();
     public static int Stage;
   public static float GameSpeed { get; private set; }
+  public static int Score { get; private set; }
 
   void Start() {
       ResetGame();
@@ -44,5 +45,9 @@ public  class SceneVariables : MonoBehaviour {
     public static void ResetGame() {
         GameSpeed = StandardGameSpeed;
     }
+
+    public static void AddScore(int value) {
+        Score += value;
+    } 
 
 }
