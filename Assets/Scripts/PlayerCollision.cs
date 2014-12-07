@@ -17,11 +17,10 @@ public class PlayerCollision : MonoBehaviour {
         if (otherObj.tag == "Obstacle") {
             Application.LoadLevel(0);
             SceneVariables.ResetGame();
-            Debug.Log("CollisionObs");
         }
         if (otherObj.tag == "Collectable") {
+            otherObj.SendMessage("EmitParticles");
             Destroy(otherObj.gameObject);
-            Debug.Log("CollisionCol");
             SceneVariables.AddScore(5);
         }
     }

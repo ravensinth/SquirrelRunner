@@ -17,10 +17,10 @@ public class CollectableBehaviour : MonoBehaviour {
         if (otherObj.tag == "Obstacle") {
             Destroy(this.gameObject);
         }
-        if (otherObj.tag == "Player") {
-            Debug.Log("hit in collec");
-            Instantiate(ParticleOnCollect, this.transform.position, this.transform.rotation);
-        }
+    }
+
+    void EmitParticles() {
+        Instantiate(ParticleOnCollect, this.transform.position, this.transform.rotation);
     }
 
 
