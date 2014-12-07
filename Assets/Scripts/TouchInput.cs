@@ -25,6 +25,7 @@ public class TouchInput : MonoBehaviour {
             }
         }
 # endif
+        /*
         // Touch 
         if (Input.GetTouch(0).position.x < Screen.width / 2) {
             ControllingInstance.SendMessage("TouchLeft");
@@ -32,5 +33,6 @@ public class TouchInput : MonoBehaviour {
         else if (Input.GetTouch(0).position.x > Screen.width / 2) {
             ControllingInstance.SendMessage("TouchRight");
         }
+         */
     }
 }

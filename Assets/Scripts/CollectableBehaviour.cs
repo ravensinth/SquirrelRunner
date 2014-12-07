@@ -2,6 +2,7 @@
 using System.Collections;
 
 public class CollectableBehaviour : MonoBehaviour {
+    public ParticleSystem ParticleOnCollect;
 
 	// Use this for initialization
 	void Start () {
@@ -18,7 +19,7 @@ public class CollectableBehaviour : MonoBehaviour {
         }
         if (otherObj.tag == "Player") {
             Debug.Log("hit in collec");
-            this.particleSystem.Emit(25);
+            Instantiate(ParticleOnCollect, this.transform.position, this.transform.rotation);
         }
     }
 
