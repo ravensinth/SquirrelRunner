@@ -20,7 +20,7 @@ public class PlayerCollision : MonoBehaviour {
             Debug.Log("CollisionObs");
         }
         if (otherObj.tag == "Collectable") {
-            Destroy(otherObj.gameObject);
+            //Destroy(otherObj.gameObject);
             Debug.Log("CollisionCol");
             SceneVariables.AddScore(5);
         }

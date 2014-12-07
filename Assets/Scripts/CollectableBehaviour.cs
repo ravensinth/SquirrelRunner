@@ -16,5 +16,11 @@ public class CollectableBehaviour : MonoBehaviour {
         if (otherObj.tag == "Obstacle") {
             Destroy(this.gameObject);
         }
+        if (otherObj.tag == "Player") {
+            Debug.Log("hit in collec");
+            this.particleSystem.Emit(25);
+        }
     }
+
+
 }
