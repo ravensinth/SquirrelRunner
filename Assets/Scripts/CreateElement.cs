@@ -6,10 +6,11 @@ public class CreateElement : MonoBehaviour {
     public GameObject Element;
     private static float XLeftSide = -1.25f;
     private static float XRightSide = 1.25f;
-    public float FixedY;
+    public float GeneratePrePlayer;
     public float MaxDistanceToNext;
     public float MinDistanceToNext;
     public float FactorProbablySameSide;
+    private GameObject player;
     //Werden genutzt um anzugeben wie oft hintereinander auf der selben Seite gesetzt wurde
     private int consecutiveRight, consecutiveLeft;
 
@@ -18,13 +19,15 @@ public class CreateElement : MonoBehaviour {
 
     // Use this for initialization
     void Start() {
-        placeElement();
+        player = GameObject.FindGameObjectWithTag("Player");
+        Instantiate(Element, new Vector3(leftOrRight(), player.transform.position.y + MaxDistanceToNext, Element.transform.position.z), Quaternion.identity);
+        setDistanceNextOne();
     }
 
     // Update is called once per frame
     void Update() {
         if (getNewestElement() != null) {
-            if (FixedY - getNewestElement().transform.position.y >= distanceNextOne) {
+            if (getNewestElement().transform.position.y - player.transform.position.y  <= GeneratePrePlayer) {
                 placeElement();
             }
         }
@@ -32,7 +35,7 @@ public class CreateElement : MonoBehaviour {
     }
 
     void placeElement() {
-        Instantiate(Element, new Vector3(leftOrRight(), FixedY, Element.transform.position.z), Quaternion.identity);
+        Instantiate(Element, new Vector3(leftOrRight(), getNewestElement().transform.position.y + distanceNextOne, Element.transform.position.z), Quaternion.identity);
         setDistanceNextOne();
     }
     

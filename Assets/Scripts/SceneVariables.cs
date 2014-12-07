@@ -2,20 +2,20 @@
 using System.Collections;
 using System.Collections.Generic;
 
-public  class SceneVariables : MonoBehaviour {
+public class SceneVariables : MonoBehaviour {
 
-    private static float StandardGameSpeed = 4;
+    private static float StandardGameSpeed = 3;
     private static int countTreesInScene = 1;
     private static int TreesCreated = 0;
     private static int TreesCreatedThisStage = 0;
     //public static List<GameObject> TreesInScene = new List<GameObject>();
     public static int Stage;
-  public static float GameSpeed { get; private set; }
-  public static int Score { get; private set; }
+    public static float GameSpeed { get; private set; }
+    public static int Score { get; private set; }
 
-  void Start() {
-      ResetGame();
-  }
+    void Start() {
+        ResetGame();
+    }
 
     void Update() { }
 
@@ -44,10 +44,13 @@ public  class SceneVariables : MonoBehaviour {
 
     public static void ResetGame() {
         GameSpeed = StandardGameSpeed;
+        countTreesInScene = 1;
+        TreesCreated = 0;
+        TreesCreatedThisStage = 0;
     }
 
     public static void AddScore(int value) {
         Score += value;
-    } 
+    }
 
 }
