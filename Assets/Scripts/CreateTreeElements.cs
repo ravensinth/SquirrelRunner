@@ -12,7 +12,6 @@ public class CreateTreeElements : MonoBehaviour {
     }
 
     void CreateNextTreeElement() {
-        Debug.Log(this.renderer.bounds.max.y);
         Instantiate(TreeElement, new Vector3(this.transform.position.x, this.transform.position.y + (this.renderer.bounds.max.y - this.renderer.bounds.min.y), this.transform.position.z), Quaternion.identity);
         SceneVariables.AddScore(1);
     }
