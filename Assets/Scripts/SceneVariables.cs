@@ -47,6 +47,7 @@ public class SceneVariables : MonoBehaviour {
         countTreesInScene = 1;
         TreesCreated = 0;
         TreesCreatedThisStage = 0;
+        Score = 0;
     }
 
     public static void AddScore(int value) {
