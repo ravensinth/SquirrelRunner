@@ -10,6 +10,7 @@ public class PlayerMove2 : MonoBehaviour {
     public float BoostVelocity;
     bool boostActive;
     float boostSpeed;
+    private bool UseControlModeClick, UseControlModeSwype;
     void Start() {
         boostSpeed = GameSpeed;
     }
@@ -25,12 +26,13 @@ public class PlayerMove2 : MonoBehaviour {
         this.transform.position += moveObject * boostSpeed * Time.deltaTime;
     }
 
+    #region Control Mode Click
     void TouchLeft() {
         if (this.transform.position.x == -1.25f) {
             activateBoost();
         }
         else {
-            this.transform.position = new Vector3(-1.25f, this.transform.position.y, 0);
+            SetPlayerLeft();
         }
     }
 
@@ -39,8 +41,32 @@ public class PlayerMove2 : MonoBehaviour {
             activateBoost();
         }
         else {
-            this.transform.position = new Vector3(1.25f, this.transform.position.y, 0);
+            SetPlayerRight();
         }
+    }
+
+    #endregion
+
+    #region Control Mode Swype
+
+    void Click() {
+        activateBoost();
+    }
+
+    void SwypeLeft() {
+        SetPlayerLeft();
+    }
+
+    void SwypeRight() {
+        SetPlayerRight();
+    }
+#endregion
+    void SetPlayerLeft() {
+        this.transform.position = new Vector3(-1.25f, this.transform.position.y, 0);
+    }
+
+    void SetPlayerRight() {
+        this.transform.position = new Vector3(1.25f, this.transform.position.y, 0);
     }
 
     void activateBoost() {
