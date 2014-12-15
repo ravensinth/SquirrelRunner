@@ -38,9 +38,10 @@ public class TouchInput : MonoBehaviour {
         }
          */
         }
-#endregion
+        #endregion
 
         #region Control Mode Swype
+# if UNITY_EDITOR
         //Maus
         if (UseControlModeSwype) {
             // On first Click
@@ -70,9 +71,38 @@ public class TouchInput : MonoBehaviour {
                 else {
                     ControllingInstance.SendMessage("Click");
                 }
-            }            
+            }
         }
+#endif
+        //Touch
+        if (UseControlModeSwype) {
+            // On first Click
+            if (Input.GetTouch(0).phase == TouchPhase.Began) {
+                sywpeStart = Input.GetTouch(0).position;
+            }
+            // On holding down
+            if (Input.GetTouch(0).phase == TouchPhase.Moved) {
+                swypeEnd = Input.GetTouch(0).position;
+            }
+            // On letting go
+            if (Input.GetTouch(0).phase == TouchPhase.Ended) {
+                //Used to minimize an error whemn making very short touches
+                int ErrorPotential = Screen.width / 5;
+                if (System.Math.Abs(swypeEnd.x - sywpeStart.x) > ErrorPotential) {
 
+                    if (swypeEnd.x - sywpeStart.x > ErrorPotential) {
+                        ControllingInstance.SendMessage("SwypeRight");
+                    }
+                    else if (swypeEnd.x - sywpeStart.x < -ErrorPotential) {
+                        ControllingInstance.SendMessage("SwypeLeft");
+                    }
+                }
+                // Ein einfache Klick
+                else {
+                    ControllingInstance.SendMessage("Click");
+                }
+            }
+        }
         #endregion
 
 
