@@ -15,10 +15,7 @@ public class PlayerCollision : MonoBehaviour {
 
     void OnTriggerEnter2D(Collider2D otherObj) {
         if (otherObj.tag == "Obstacle") {
-            //besser an andere Stelle
-            HandleScore.UpdateHighScore(SceneVariables.Score);
-            Application.LoadLevel(1);
-            //SceneVariables.ResetGame();
+            SceneVariables.ResetGame();
         }
         if (otherObj.tag == "Collectable") {
             otherObj.SendMessage("EmitParticles");
