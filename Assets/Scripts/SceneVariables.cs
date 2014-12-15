@@ -14,7 +14,7 @@ public class SceneVariables : MonoBehaviour {
     public static int Score { get; private set; }
 
     void Start() {
-        ResetGame();
+        StartGame();
     }
 
     void Update() { }
@@ -43,15 +43,24 @@ public class SceneVariables : MonoBehaviour {
     }
 
     public static void ResetGame() {
-        GameSpeed = StandardGameSpeed;
-        countTreesInScene = 1;
-        TreesCreated = 0;
-        TreesCreatedThisStage = 0;
-        Score = 0;
+        HandleScore.UpdateHighScore(SceneVariables.Score);
+        Application.LoadLevel(1);
+        //GameSpeed = StandardGameSpeed;
+        //countTreesInScene = 1;
+        //TreesCreated = 0;
+        //TreesCreatedThisStage = 0;
+        //Score = 0;
     }
 
     public static void AddScore(int value) {
         Score += value;
     }
 
+    private void StartGame() {
+        GameSpeed = StandardGameSpeed;
+        countTreesInScene = 1;
+        TreesCreated = 0;
+        TreesCreatedThisStage = 0;
+        Score = 0;
+    }
 }
