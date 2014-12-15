@@ -21,7 +21,7 @@ public class PlayerMove2 : MonoBehaviour {
         Vector3 moveObject = Vector3.up;
 
         boostSpeed = getBoostSpeed();
-        Debug.Log(boostSpeed);
+        //Debug.Log(boostSpeed);
 
         this.transform.position += moveObject * boostSpeed * Time.deltaTime;
     }

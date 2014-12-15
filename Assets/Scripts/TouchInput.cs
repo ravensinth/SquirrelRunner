@@ -52,24 +52,25 @@ public class TouchInput : MonoBehaviour {
             if (Input.GetMouseButton(0) && swyping) {
                 swypeEnd = Input.mousePosition;
             }
-            // On letting go
+            // On letting go swyping Variable momenan niocht nötig 
             if (Input.GetMouseButtonUp(0) && swyping) {
 
                 //Used to minimize an error whemn making very short touches
                 int ErrorPotential = Screen.width / 5;
+                if (System.Math.Abs(swypeEnd.x - sywpeStart.x) > ErrorPotential) {
 
-                if (swypeEnd.x - sywpeStart.x > ErrorPotential) {
-                    ControllingInstance.SendMessage("SwypeRight");
+                    if (swypeEnd.x - sywpeStart.x > ErrorPotential) {
+                        ControllingInstance.SendMessage("SwypeRight");
+                    }
+                    else if (swypeEnd.x - sywpeStart.x < -ErrorPotential) {
+                        ControllingInstance.SendMessage("SwypeLeft");
+                    }
                 }
-                else if (swypeEnd.x - sywpeStart.x < -ErrorPotential) {
-                    ControllingInstance.SendMessage("SwypeLeft");
+                // Ein einfache Klick
+                else {
+                    ControllingInstance.SendMessage("Click");
                 }
-
-            }
-            // Ein einfache Klick
-            else if (Input.GetMouseButtonUp(0)) { 
-            
-            }
+            }            
         }
 
         #endregion
