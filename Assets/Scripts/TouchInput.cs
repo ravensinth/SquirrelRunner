@@ -8,6 +8,9 @@ public class TouchInput : MonoBehaviour {
     private bool swyping;
     private Vector2 sywpeStart, swypeEnd;
 
+    //used to indicate whether movement happened while holding down
+    bool swyped = false;
+
     // Use this for initialization
     void Start() {
     }
@@ -74,16 +77,36 @@ public class TouchInput : MonoBehaviour {
             }
         }
 #endif
-        //Touch
+        //Touch        
         if (UseControlModeSwype) {
             // On first Click
             if (Input.GetTouch(0).phase == TouchPhase.Began) {
                 sywpeStart = Input.GetTouch(0).position;
+                swyped = false;
             }
             // On holding down
             if (Input.GetTouch(0).phase == TouchPhase.Moved) {
                 swypeEnd = Input.GetTouch(0).position;
+
+                //Used to minimize an error when making very short touches
+                int ErrorPotential = Screen.width / 5;
+                if (System.Math.Abs(swypeEnd.x - sywpeStart.x) > ErrorPotential) {
+
+                    if (swypeEnd.x - sywpeStart.x > ErrorPotential) {
+                        ControllingInstance.SendMessage("SwypeRight");
+                        //bei versetzen ist aktueller swype beendet und startet von dort neu
+                        sywpeStart = swypeEnd;
+                        swyped = true;
+                    }
+                    else if (swypeEnd.x - sywpeStart.x < -ErrorPotential) {
+                        ControllingInstance.SendMessage("SwypeLeft");
+                        //bei versetzen ist aktueller swype beendet und startet von dort neu
+                        sywpeStart = swypeEnd;
+                        swyped = true;
+                    }
+                }
             }
+
             // On letting go
             if (Input.GetTouch(0).phase == TouchPhase.Ended) {
                 //Used to minimize an error whemn making very short touches
@@ -92,13 +115,15 @@ public class TouchInput : MonoBehaviour {
 
                     if (swypeEnd.x - sywpeStart.x > ErrorPotential) {
                         ControllingInstance.SendMessage("SwypeRight");
+                        swyped = true;
                     }
                     else if (swypeEnd.x - sywpeStart.x < -ErrorPotential) {
                         ControllingInstance.SendMessage("SwypeLeft");
+                        swyped = true;
                     }
                 }
                 // Ein einfache Klick
-                else {
+                else if (!swyped){
                     ControllingInstance.SendMessage("Click");
                 }
             }
