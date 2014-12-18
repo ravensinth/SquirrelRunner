@@ -4,7 +4,7 @@ using System.Collections;
 public class TouchInput : MonoBehaviour {
 
     public GameObject ControllingInstance;
-    public bool UseControlModeClick, UseControlModeSwype;
+    private bool UseControlModeClick, UseControlModeSwype;
     private bool swyping;
     private Vector2 sywpeStart, swypeEnd;
 
@@ -18,8 +18,8 @@ public class TouchInput : MonoBehaviour {
     // Update is called once per frame
     void Update() {
         #region  Control Mode Click
+        // Control Mode Click
         if (UseControlModeClick) {
-            // Control Mode 1 
 # if UNITY_EDITOR
             //Mouse        
             if (Input.GetMouseButtonDown(0)) {
@@ -31,15 +31,15 @@ public class TouchInput : MonoBehaviour {
                 }
             }
 # endif
-            /*
-        // Touch 
-        if (Input.GetTouch(0).position.x < Screen.width / 2) {
-            ControllingInstance.SendMessage("TouchLeft");
-        }
-        else if (Input.GetTouch(0).position.x > Screen.width / 2) {
-            ControllingInstance.SendMessage("TouchRight");
-        }
-         */
+
+            // Touch 
+            if (Input.GetTouch(0).position.x < Screen.width / 2) {
+                ControllingInstance.SendMessage("TouchLeft");
+            }
+            else if (Input.GetTouch(0).position.x > Screen.width / 2) {
+                ControllingInstance.SendMessage("TouchRight");
+            }
+
         }
         #endregion
 
@@ -75,14 +75,13 @@ public class TouchInput : MonoBehaviour {
                     ControllingInstance.SendMessage("Click");
                 }
             }
-        }
+
 #endif
-        //Touch        
-        if (UseControlModeSwype) {
+            //Touch        
             // On first Click
             if (Input.GetTouch(0).phase == TouchPhase.Began) {
                 sywpeStart = Input.GetTouch(0).position;
-                 swypeEnd = Input.GetTouch(0).position;
+                swypeEnd = Input.GetTouch(0).position;
                 swyped = false;
             }
             // On holding down
@@ -124,7 +123,7 @@ public class TouchInput : MonoBehaviour {
                     }
                 }
                 // Ein einfache Klick
-                else if (!swyped){
+                else if (!swyped) {
                     ControllingInstance.SendMessage("Click");
                 }
             }

@@ -8,7 +8,7 @@ public class DisplayLastScore : MonoBehaviour {
 	// Use this for initialization
 	void Start () {
         LastScore = this.GetComponent<Text>();
-        LastScore.text = "Score: " + SceneVariables.Score;
+        LastScore.text = "Score: " + SceneVariables.Score;      
 	}
 	
 	// Update is called once per frame
