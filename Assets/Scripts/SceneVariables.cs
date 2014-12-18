@@ -44,8 +44,9 @@ public class SceneVariables : MonoBehaviour {
 
     public static void ResetGame() {
         HandleScore.UpdateHighScore(SceneVariables.Score);
+        GameSpeed = StandardGameSpeed;
         Application.LoadLevel(1);
-        //GameSpeed = StandardGameSpeed;
+        
         //countTreesInScene = 1;
         //TreesCreated = 0;
         //TreesCreatedThisStage = 0;

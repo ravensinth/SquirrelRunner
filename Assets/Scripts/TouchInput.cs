@@ -82,6 +82,7 @@ public class TouchInput : MonoBehaviour {
             // On first Click
             if (Input.GetTouch(0).phase == TouchPhase.Began) {
                 sywpeStart = Input.GetTouch(0).position;
+                 swypeEnd = Input.GetTouch(0).position;
                 swyped = false;
             }
             // On holding down
