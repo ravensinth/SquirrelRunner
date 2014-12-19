@@ -13,6 +13,7 @@ public class SceneVariables : MonoBehaviour {
     public static int Score { get; private set; }
 
     void Start() {
+        SettingsHandler.loadSettings();
         StartGame();
     }
 

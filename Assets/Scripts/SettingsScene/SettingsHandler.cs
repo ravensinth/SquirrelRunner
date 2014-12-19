@@ -39,7 +39,7 @@ public class SettingsHandler : MonoBehaviour {
         //Debug.Log("Update Speed: " + StartSpeed);
 	}
 
-    void loadSettings() {
+    public static void loadSettings() {
         UseControlModeSwype = Convert.ToBoolean(PlayerPrefs.GetInt("UseControlModeSwype"));
         UseControlModeClick = Convert.ToBoolean(PlayerPrefs.GetInt("UseControlModeClick"));
         SmoothCamera = Convert.ToBoolean(PlayerPrefs.GetInt("SmoothCamera"));        
