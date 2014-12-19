@@ -1,6 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 using System.Collections.Generic;
+using System;
 
 public class SceneVariables : MonoBehaviour {
 
@@ -45,16 +46,11 @@ public class SceneVariables : MonoBehaviour {
     public static void ResetGame() {
         HandleScore.UpdateHighScore(SceneVariables.Score);
         GameSpeed = SettingsHandler.StartSpeed; ;
-        Application.LoadLevel(1);
-        
-        //countTreesInScene = 1;
-        //TreesCreated = 0;
-        //TreesCreatedThisStage = 0;
-        //Score = 0;
+        Application.LoadLevel(1);       
     }
 
     public static void AddScore(int value) {
-        Score += value;
+        Score += Convert.ToInt32(Math.Round((value * GameSpeed)/2));
     }
 
     private void StartGame() {

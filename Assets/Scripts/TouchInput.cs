@@ -31,7 +31,8 @@ public class TouchInput : MonoBehaviour {
                     ControllingInstance.SendMessage("TouchRight");
                 }
             }
-# endif
+#endif
+# if UNITY_ANDROID
 
             // Touch 
             if (Input.GetTouch(0).position.x < Screen.width / 2) {
@@ -42,6 +43,7 @@ public class TouchInput : MonoBehaviour {
             }
 
         }
+# endif
         #endregion
 
         #region Control Mode Swype
@@ -76,8 +78,8 @@ public class TouchInput : MonoBehaviour {
                     ControllingInstance.SendMessage("Click");
                 }
             }
-
 #endif
+# if UNITY_ANDROID
             //Touch        
             // On first Click
             if (Input.GetTouch(0).phase == TouchPhase.Began) {
@@ -129,9 +131,7 @@ public class TouchInput : MonoBehaviour {
                 }
             }
         }
+#endif
         #endregion
-
-
-
     }
 }
