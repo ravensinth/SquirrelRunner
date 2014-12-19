@@ -4,7 +4,8 @@ using System.Collections;
 public class TouchInput : MonoBehaviour {
 
     public GameObject ControllingInstance;
-    private bool UseControlModeClick, UseControlModeSwype;
+    private bool UseControlModeClick = SettingsHandler.UseControlModeClick;
+    private bool UseControlModeSwype = SettingsHandler.UseControlModeSwype;
     private bool swyping;
     private Vector2 sywpeStart, swypeEnd;
 

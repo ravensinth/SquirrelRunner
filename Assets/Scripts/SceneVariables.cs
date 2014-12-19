@@ -4,7 +4,6 @@ using System.Collections.Generic;
 
 public class SceneVariables : MonoBehaviour {
 
-    private static float StandardGameSpeed = 4;
     private static int countTreesInScene = 1;
     private static int TreesCreated = 0;
     private static int TreesCreatedThisStage = 0;
@@ -44,7 +43,7 @@ public class SceneVariables : MonoBehaviour {
 
     public static void ResetGame() {
         HandleScore.UpdateHighScore(SceneVariables.Score);
-        GameSpeed = StandardGameSpeed;
+        GameSpeed = SettingsHandler.StartSpeed; ;
         Application.LoadLevel(1);
         
         //countTreesInScene = 1;
@@ -58,7 +57,7 @@ public class SceneVariables : MonoBehaviour {
     }
 
     private void StartGame() {
-        GameSpeed = StandardGameSpeed;
+        GameSpeed = SettingsHandler.StartSpeed; ;
         countTreesInScene = 1;
         TreesCreated = 0;
         TreesCreatedThisStage = 0;
