@@ -11,6 +11,7 @@ public class PlayerMove2 : MonoBehaviour {
     bool boostActive;
     float boostSpeed;
     private bool UseControlModeClick, UseControlModeSwype;
+    public ParticleSystem BoostParticles;
     void Start() {
         boostSpeed = GameSpeed;
     }
@@ -72,6 +73,10 @@ public class PlayerMove2 : MonoBehaviour {
     void activateBoost() {
         boostSpeed = boostSpeed + BoostPower;
         //GameSpeed statt boostSpeed einsetzen für leicht anderen Modus
+
+        if (BoostParticles != null && SettingsHandler.ParticlesOnBoost) {
+            BoostParticles.Play();
+        }
     }
 
     float getBoostSpeed() {
