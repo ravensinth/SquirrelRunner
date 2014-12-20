@@ -35,13 +35,14 @@ public class TouchInput : MonoBehaviour {
 # if UNITY_ANDROID
 
             // Touch 
-            if (Input.GetTouch(0).position.x < Screen.width / 2) {
-                ControllingInstance.SendMessage("TouchLeft");
+            if (Input.touchCount > 0) {
+                if (Input.GetTouch(0).position.x < Screen.width / 2) {
+                    ControllingInstance.SendMessage("TouchLeft");
+                }
+                else if (Input.GetTouch(0).position.x > Screen.width / 2) {
+                    ControllingInstance.SendMessage("TouchRight");
+                }
             }
-            else if (Input.GetTouch(0).position.x > Screen.width / 2) {
-                ControllingInstance.SendMessage("TouchRight");
-            }
-
         }
 # endif
         #endregion
@@ -81,53 +82,55 @@ public class TouchInput : MonoBehaviour {
 #endif
 # if UNITY_ANDROID
             //Touch        
-            // On first Click
-            if (Input.GetTouch(0).phase == TouchPhase.Began) {
-                sywpeStart = Input.GetTouch(0).position;
-                swypeEnd = Input.GetTouch(0).position;
-                swyped = false;
-            }
-            // On holding down
-            if (Input.GetTouch(0).phase == TouchPhase.Moved) {
-                swypeEnd = Input.GetTouch(0).position;
+            if (Input.touchCount > 0) {
+                // On first Click
+                if (Input.GetTouch(0).phase == TouchPhase.Began) {
+                    sywpeStart = Input.GetTouch(0).position;
+                    swypeEnd = Input.GetTouch(0).position;
+                    swyped = false;
+                }
+                // On holding down
+                if (Input.GetTouch(0).phase == TouchPhase.Moved) {
+                    swypeEnd = Input.GetTouch(0).position;
 
-                //Used to minimize an error when making very short touches
-                int ErrorPotential = Screen.width / 5;
-                if (System.Math.Abs(swypeEnd.x - sywpeStart.x) > ErrorPotential) {
+                    //Used to minimize an error when making very short touches
+                    int ErrorPotential = Screen.width / 5;
+                    if (System.Math.Abs(swypeEnd.x - sywpeStart.x) > ErrorPotential) {
 
-                    if (swypeEnd.x - sywpeStart.x > ErrorPotential) {
-                        ControllingInstance.SendMessage("SwypeRight");
-                        //bei versetzen ist aktueller swype beendet und startet von dort neu
-                        sywpeStart = swypeEnd;
-                        swyped = true;
-                    }
-                    else if (swypeEnd.x - sywpeStart.x < -ErrorPotential) {
-                        ControllingInstance.SendMessage("SwypeLeft");
-                        //bei versetzen ist aktueller swype beendet und startet von dort neu
-                        sywpeStart = swypeEnd;
-                        swyped = true;
+                        if (swypeEnd.x - sywpeStart.x > ErrorPotential) {
+                            ControllingInstance.SendMessage("SwypeRight");
+                            //bei versetzen ist aktueller swype beendet und startet von dort neu
+                            sywpeStart = swypeEnd;
+                            swyped = true;
+                        }
+                        else if (swypeEnd.x - sywpeStart.x < -ErrorPotential) {
+                            ControllingInstance.SendMessage("SwypeLeft");
+                            //bei versetzen ist aktueller swype beendet und startet von dort neu
+                            sywpeStart = swypeEnd;
+                            swyped = true;
+                        }
                     }
                 }
-            }
 
-            // On letting go
-            if (Input.GetTouch(0).phase == TouchPhase.Ended) {
-                //Used to minimize an error whemn making very short touches
-                int ErrorPotential = Screen.width / 5;
-                if (System.Math.Abs(swypeEnd.x - sywpeStart.x) > ErrorPotential) {
+                // On letting go
+                if (Input.GetTouch(0).phase == TouchPhase.Ended) {
+                    //Used to minimize an error whemn making very short touches
+                    int ErrorPotential = Screen.width / 5;
+                    if (System.Math.Abs(swypeEnd.x - sywpeStart.x) > ErrorPotential) {
 
-                    if (swypeEnd.x - sywpeStart.x > ErrorPotential) {
-                        ControllingInstance.SendMessage("SwypeRight");
-                        swyped = true;
+                        if (swypeEnd.x - sywpeStart.x > ErrorPotential) {
+                            ControllingInstance.SendMessage("SwypeRight");
+                            swyped = true;
+                        }
+                        else if (swypeEnd.x - sywpeStart.x < -ErrorPotential) {
+                            ControllingInstance.SendMessage("SwypeLeft");
+                            swyped = true;
+                        }
                     }
-                    else if (swypeEnd.x - sywpeStart.x < -ErrorPotential) {
-                        ControllingInstance.SendMessage("SwypeLeft");
-                        swyped = true;
+                    // Ein einfache Klick
+                    else if (!swyped) {
+                        ControllingInstance.SendMessage("Click");
                     }
-                }
-                // Ein einfache Klick
-                else if (!swyped) {
-                    ControllingInstance.SendMessage("Click");
                 }
             }
         }
