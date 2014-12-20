@@ -12,6 +12,9 @@ public class PlayerMove2 : MonoBehaviour {
     float boostSpeed;
     private bool UseControlModeClick, UseControlModeSwype;
     public ParticleSystem BoostParticles;
+
+    private const float PosLeftSideX = -2f;
+    private const float PosRightSideX = 2f;
     void Start() {
         boostSpeed = GameSpeed;
     }
@@ -29,7 +32,7 @@ public class PlayerMove2 : MonoBehaviour {
 
     #region Control Mode Click
     void TouchLeft() {
-        if (this.transform.position.x == -1.25f) {
+        if (this.transform.position.x == PosLeftSideX) {
             activateBoost();
         }
         else {
@@ -38,7 +41,7 @@ public class PlayerMove2 : MonoBehaviour {
     }
 
     void TouchRight() {
-        if (this.transform.position.x == 1.25f) {
+        if (this.transform.position.x == PosRightSideX) {
             activateBoost();
         }
         else {
@@ -63,11 +66,13 @@ public class PlayerMove2 : MonoBehaviour {
     }
 #endregion
     void SetPlayerLeft() {
-        this.transform.position = new Vector3(-1.25f, this.transform.position.y, 0);
+        this.transform.position = new Vector3(PosLeftSideX, this.transform.position.y, 0);
+        this.transform.rotation = Quaternion.Euler(0, 180, 0);
     }
 
     void SetPlayerRight() {
-        this.transform.position = new Vector3(1.25f, this.transform.position.y, 0);
+        this.transform.position = new Vector3(PosRightSideX, this.transform.position.y, 0);
+        this.transform.rotation = Quaternion.identity;
     }
 
     void activateBoost() {

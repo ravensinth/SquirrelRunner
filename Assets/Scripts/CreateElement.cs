@@ -4,8 +4,8 @@ using System.Collections;
 public class CreateElement : MonoBehaviour {
 
     public GameObject Element;
-    private static float XLeftSide = -1.25f;
-    private static float XRightSide = 1.25f;
+    private static float XLeftSide = -1.75f;
+    private static float XRightSide = 1.75f;
     public float GeneratePrePlayer;
     public float MaxDistanceToNext;
     public float MinDistanceToNext;
@@ -20,14 +20,15 @@ public class CreateElement : MonoBehaviour {
     // Use this for initialization
     void Start() {
         player = GameObject.FindGameObjectWithTag("Player");
-        Instantiate(Element, new Vector3(leftOrRight(), player.transform.position.y + MaxDistanceToNext, Element.transform.position.z), Quaternion.identity);
+        float posX = leftOrRight();
+        Instantiate(Element, new Vector3(posX, player.transform.position.y + MaxDistanceToNext, Element.transform.position.z), getRotation(posX));
         setDistanceNextOne();
     }
 
     // Update is called once per frame
     void Update() {
         if (getNewestElement() != null) {
-            if (getNewestElement().transform.position.y - player.transform.position.y  <= GeneratePrePlayer) {
+            if (getNewestElement().transform.position.y - player.transform.position.y <= GeneratePrePlayer) {
                 placeElement();
             }
         }
@@ -35,10 +36,12 @@ public class CreateElement : MonoBehaviour {
     }
 
     void placeElement() {
-        Instantiate(Element, new Vector3(leftOrRight(), getNewestElement().transform.position.y + distanceNextOne, Element.transform.position.z), Quaternion.identity);
+        // Turn Element if on left side
+        float posX = leftOrRight();
+        Instantiate(Element, new Vector3(posX, getNewestElement().transform.position.y + distanceNextOne, Element.transform.position.z), getRotation(posX));
         setDistanceNextOne();
     }
-    
+
 
     float leftOrRight() {
         float min = 0.0f + consecutiveLeft * FactorProbablySameSide;
@@ -70,5 +73,13 @@ public class CreateElement : MonoBehaviour {
             }
         }
         return newest;
+    }
+
+    Quaternion getRotation(float leftOrRight) {
+        Quaternion rotation = Quaternion.identity;
+        if (leftOrRight == XLeftSide) {
+            rotation = Quaternion.Euler(0, 180, 0);
+        }
+        return rotation;
     }
 }
