@@ -32,8 +32,6 @@ public class TouchInput : MonoBehaviour {
                 }
             }
 #endif
-# if UNITY_ANDROID
-
             // Touch 
             if (Input.touchCount > 0) {
                 if (Input.GetTouch(0).position.x < Screen.width / 2) {
@@ -44,13 +42,12 @@ public class TouchInput : MonoBehaviour {
                 }
             }
         }
-# endif
         #endregion
 
         #region Control Mode Swype
+        if (UseControlModeSwype) {
 # if UNITY_EDITOR
         //Maus
-        if (UseControlModeSwype) {
             // On first Click
             if (Input.GetMouseButtonDown(0)) {
                 swyping = true;
@@ -80,7 +77,6 @@ public class TouchInput : MonoBehaviour {
                 }
             }
 #endif
-# if UNITY_ANDROID
             //Touch        
             if (Input.touchCount > 0) {
                 // On first Click
@@ -134,7 +130,6 @@ public class TouchInput : MonoBehaviour {
                 }
             }
         }
-#endif
         #endregion
     }
 }
