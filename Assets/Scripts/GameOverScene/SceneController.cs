@@ -14,9 +14,9 @@ public class SceneController : MonoBehaviour {
 	}
 
     public void RestartGame() {
-        Application.LoadLevel(0);
+        Application.LoadLevel("GameScene");
     }
     public void LoadSettingsScene() {
-        Application.LoadLevel(2);
+        Application.LoadLevel("SettingsScene");
     }
 }

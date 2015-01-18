@@ -46,7 +46,7 @@ public class SceneVariables : MonoBehaviour {
     public static void ResetGame() {
         HandleScore.UpdateHighScore(SceneVariables.Score);
         GameSpeed = SettingsHandler.StartSpeed; ;
-        Application.LoadLevel(1);       
+        Application.LoadLevel("GameOverScene");       
     }
 
     public static void AddScore(int value) {

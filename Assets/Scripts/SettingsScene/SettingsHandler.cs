@@ -74,7 +74,7 @@ public class SettingsHandler : MonoBehaviour {
 
     public void StartGame() {
         saveSettings();
-        Application.LoadLevel(0);
+        Application.LoadLevel("GameScene");
     }
 
 
